@@ -27,9 +27,9 @@ parameters:
       - destroy
 resources:
   repositories:
-    - repository: mytestrepo
+    - repository: pipelinetestrepo
       type: github
-      name: anandctx/anandaksdemo
+      name: anandctx/pipelinetestswap
       endpoint: 'terraform-cicd-nov21'
 
 
@@ -41,8 +41,8 @@ stages:
     jobs:
       - job: Build
         steps: 
-        - checkout: mytestrepo
-          path: mytestrepo
+        - checkout: pipelinetestrepo
+          path: pipelinetestrepo
         - checkout: self 
           path: self
         - task: CopyFiles@2
@@ -53,7 +53,7 @@ stages:
 
         - task: CopyFiles@2
           inputs:
-            SourceFolder: '$(pipeline.workspace)/mytestrepo'
+            SourceFolder: '$(pipeline.workspace)/pipelinetestrepo'
             Contents: '**'
             TargetFolder: '$(build.artifactstagingdirectory)/terraform'
 
