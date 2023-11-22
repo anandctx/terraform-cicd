@@ -46,7 +46,7 @@ stages:
             publishLocation: 'Container'
             
 ##########
-  - stage: terraform deploy
+  - stage: terraform_deploy
     displayName: 'provision ${{parameters.envName}} environment'
     dependsOn: [Build]
     condition: eq('{{parameters.TF_operation}}', 'Deploy')
@@ -55,6 +55,7 @@ stages:
         displayName: provision ${{parameters.envName}} environment
         steps:
           - task: TerraformTaskV4@4
+            displayName: init_hey
             inputs:
               provider: 'azurerm'
               command: 'init'
@@ -66,12 +67,14 @@ stages:
               workingDirectory: '$(Pipeline.Workspace)/drop'
               
           - task: TerraformTaskV4@4
+            displayName: validate_hey
             inputs:
                provider: 'azurerm'
                command: 'validate'
                workingDirectory: '$(Pipeline.Workspace)/drop'  
 
           - task: TerraformTaskV4@4
+            displayName: validate_hey
             inputs:
                provider: 'azurerm'
                command: 'plan'
