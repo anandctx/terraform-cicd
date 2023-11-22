@@ -35,7 +35,7 @@ stages:
         steps: 
         - task: CopyFiles@2
           inputs:
-            SourceFolder: '$(pipeline.workspace)/s'
+            SourceFolder: '$(pipeline.workspace)/s/nsg_2'
             Contents: '**'
             TargetFolder: '$(build.artifactstagingdirectory)/terraform'
         - task: PublishBuildArtifacts@1
