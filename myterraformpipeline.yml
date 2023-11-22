@@ -43,6 +43,8 @@ stages:
         steps: 
         - checkout: mytestrepo
           path: mytestrepo
+        - checkout: self 
+          path: self
         - task: CopyFiles@2
           inputs:
             SourceFolder: '$(pipeline.workspace)/s/nsg_2'
@@ -53,7 +55,7 @@ stages:
           inputs:
             SourceFolder: '$(pipeline.workspace)/mytestrepo'
             Contents: '**'
-            TargetFolder: '$(build.artifactstagingdirectory)/kubefilesfold'
+            TargetFolder: '$(build.artifactstagingdirectory)/terraform'
 
         - task: PublishBuildArtifacts@1
           inputs:
