@@ -28,9 +28,9 @@ terraform {
 
 terraform {
 
-    backend "azurerm"{
+  backend "azurerm" {
 
-    }
+  }
 }
 
 

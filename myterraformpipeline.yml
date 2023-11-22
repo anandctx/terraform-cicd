@@ -115,6 +115,13 @@ stages:
                workingDirectory: '$(System.ArtifactsDirectory)/terraform/drop'
                environmentServiceNameAzureRM: 'cicd-terraform-svc-nov22'
 
+          - task: TerraformTaskV4@4
+            inputs:
+              provider: 'azurerm'
+              command: 'apply'
+              environmentServiceNameAzureRM: 'cicd-terraform-svc-nov22'
+              workingDirectory: '$(System.ArtifactsDirectory)/terraform/drop'
+
 
 
 
