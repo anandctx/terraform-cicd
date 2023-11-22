@@ -47,12 +47,14 @@ stages:
         - checkout: self 
           path: self
         - task: CopyFiles@2
+          displayName: copy files of nsg
           inputs:
             SourceFolder: '$(pipeline.workspace)/self/nsg_2'
             Contents: '**'
             TargetFolder: '$(build.artifactstagingdirectory)/terraform'
 
         - task: CopyFiles@2
+          displayName: copy files of the RG
           inputs:
             SourceFolder: '$(pipeline.workspace)/pipelinetestrepo'
             Contents: '**'
@@ -66,52 +68,52 @@ stages:
             publishLocation: 'Container'
             
 ##########
-  # - stage: terraform_deploy
-  #   displayName: 'provision ${{parameters.envName}} environment'
-  #   dependsOn: [Build]
-  #   # condition: eq( parameters['TF_operation'] , 'Deploy')
-  #   jobs:
-  #     - job: 
-  #       displayName: provision ${{parameters.envName}} environment
-  #       steps:
-  #         - task: DownloadBuildArtifacts@1
-  #           displayName: download the build arti from CI
-  #           inputs:
-  #              buildType: 'current'
-  #              downloadType: 'single'
-  #              artifactName: 'drop'
-  #              downloadPath: '$(System.ArtifactsDirectory)/terraform'
+  - stage: terraform_deploy
+    displayName: 'provision ${{parameters.envName}} environment'
+    dependsOn: [Build]
+    # condition: eq( parameters['TF_operation'] , 'Deploy')
+    jobs:
+      - job: 
+        displayName: provision ${{parameters.envName}} environment
+        steps:
+          - task: DownloadBuildArtifacts@1
+            displayName: download the build arti from CI
+            inputs:
+               buildType: 'current'
+               downloadType: 'single'
+               artifactName: 'drop'
+               downloadPath: '$(System.ArtifactsDirectory)/terraform'
 
-  #         - task: TerraformInstaller@1
-  #           displayName: Install terra
-  #           inputs:
-  #             terraformVersion: 'latest'
-  #         - task: TerraformTaskV4@4
-  #           displayName: init_hey
-  #           inputs:
-  #             provider: 'azurerm'
-  #             command: 'init'
-  #             backendServiceArm: 'cicd-terraform-svc-nov22'
-  #             backendAzureRmResourceGroupName: 'ibo-rg'
-  #             backendAzureRmStorageAccountName: 'terradeploy00981'
-  #             backendAzureRmContainerName: 'terracontainer'
-  #             backendAzureRmKey: 'nov22state'
-  #             workingDirectory: '$(System.ArtifactsDirectory)/terraform/drop'
+          - task: TerraformInstaller@1
+            displayName: Install terra
+            inputs:
+              terraformVersion: 'latest'
+          - task: TerraformTaskV4@4
+            displayName: init_hey
+            inputs:
+              provider: 'azurerm'
+              command: 'init'
+              backendServiceArm: 'cicd-terraform-svc-nov22'
+              backendAzureRmResourceGroupName: 'ibo-rg'
+              backendAzureRmStorageAccountName: 'terradeploy00981'
+              backendAzureRmContainerName: 'terracontainer'
+              backendAzureRmKey: 'nov22state'
+              workingDirectory: '$(System.ArtifactsDirectory)/terraform/drop'
               
-  #         - task: TerraformTaskV4@4
-  #           displayName: validate_hey
-  #           inputs:
-  #              provider: 'azurerm'
-  #              command: 'validate'
-  #              workingDirectory: '$(System.ArtifactsDirectory)/terraform/drop'
+          - task: TerraformTaskV4@4
+            displayName: validate_hey
+            inputs:
+               provider: 'azurerm'
+               command: 'validate'
+               workingDirectory: '$(System.ArtifactsDirectory)/terraform/drop'
 
-  #         - task: TerraformTaskV4@4
-  #           displayName: plan_hey
-  #           inputs:
-  #              provider: 'azurerm'
-  #              command: 'plan'
-  #              workingDirectory: '$(System.ArtifactsDirectory)/terraform/drop'
-  #              environmentServiceNameAzureRM: 'cicd-terraform-svc-nov22'
+          - task: TerraformTaskV4@4
+            displayName: plan_hey
+            inputs:
+               provider: 'azurerm'
+               command: 'plan'
+               workingDirectory: '$(System.ArtifactsDirectory)/terraform/drop'
+               environmentServiceNameAzureRM: 'cicd-terraform-svc-nov22'
 
 
 
