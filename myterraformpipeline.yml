@@ -76,7 +76,7 @@ stages:
               backendAzureRmStorageAccountName: 'terradeploy00981'
               backendAzureRmContainerName: 'terracontainer'
               backendAzureRmKey: 'nov22state'
-              workingDirectory: '$(System.ArtifactsDirectory)/terraform'
+              workingDirectory: '$(System.ArtifactsDirectory)/terraform/drop'
               
           - task: TerraformTaskV4@4
             displayName: validate_hey
