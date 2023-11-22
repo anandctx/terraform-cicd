@@ -30,7 +30,9 @@ resources:
     - repository: mytestrepo
       type: github
       name: anandctx/anandaksdemo
-      endpoint: "a"
+      endpoint: 'terraform-cicd-nov21'
+
+
 
 ############
 stages:
