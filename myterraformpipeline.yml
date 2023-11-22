@@ -90,8 +90,8 @@ stages:
             inputs:
                provider: 'azurerm'
                command: 'plan'
-               workingDirectory: '$(Pipeline.Workspace)/drop'
-               environmentServiceNameAzureRM: $(System.ArtifactsDirectory)/terraform/drop
+               workingDirectory: '$(System.ArtifactsDirectory)/terraform/drop'
+               environmentServiceNameAzureRM: 'cicd-terraform-svc-nov22'
 
 
 
