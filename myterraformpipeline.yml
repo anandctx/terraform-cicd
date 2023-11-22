@@ -41,6 +41,8 @@ stages:
     jobs:
       - job: Build
         steps: 
+        - checkout: mytestrepo
+          path: mytestrepo
         - task: CopyFiles@2
           inputs:
             SourceFolder: '$(pipeline.workspace)/s/nsg_2'
