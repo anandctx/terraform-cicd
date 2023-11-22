@@ -49,7 +49,7 @@ stages:
   - stage: terraform_deploy
     displayName: 'provision ${{parameters.envName}} environment'
     dependsOn: [Build]
-    condition: eq({{ parameters['TF_operation'] }}, 'Deploy')
+    condition: eq('{{ parameters['TF_operation'] }}', 'Deploy')
     jobs:
       - job: 
         displayName: provision ${{parameters.envName}} environment
