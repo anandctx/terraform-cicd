@@ -54,6 +54,13 @@ stages:
       - job: 
         displayName: provision ${{parameters.envName}} environment
         steps:
+          - task: DownloadBuildArtifacts@1
+            displayName: download the build arti from CI
+            inputs:
+               buildType: 'current'
+               downloadType: 'single'
+               artifactName: 'drop'
+               downloadPath: '$(System.ArtifactsDirectory)/terraform'
 
           - task: TerraformInstaller@1
             displayName: Install terra
@@ -69,7 +76,7 @@ stages:
               backendAzureRmStorageAccountName: 'terradeploy00981'
               backendAzureRmContainerName: 'terracontainer'
               backendAzureRmKey: 'nov22state'
-              workingDirectory: '$(Pipeline.Workspace)/drop'
+              workingDirectory: '$(System.ArtifactsDirectory)/terraform'
               
           - task: TerraformTaskV4@4
             displayName: validate_hey
