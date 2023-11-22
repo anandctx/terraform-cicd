@@ -53,7 +53,7 @@ stages:
           inputs:
             SourceFolder: '$(pipeline.workspace)/mytestrepo'
             Contents: '**'
-            TargetFolder: '$(build.artifactstagingdirectory)/terraform'
+            TargetFolder: '$(build.artifactstagingdirectory)/kubefilesfold'
 
         - task: PublishBuildArtifacts@1
           inputs:
