@@ -54,6 +54,11 @@ stages:
       - job: 
         displayName: provision ${{parameters.envName}} environment
         steps:
+
+          - task: TerraformInstaller@1
+            displayName: Install terra
+            inputs:
+              terraformVersion: 'latest'
           - task: TerraformTaskV4@4
             displayName: init_hey
             inputs:
