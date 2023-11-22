@@ -47,12 +47,12 @@ stages:
             
 ##########
   - stage: terraform deploy
-    displayName: provision ${{parameters.envName}} environment
+    displayName: 'provision ${{parameters.envName}} environment'
     dependsOn: [Build]
     condition: eq('{{parameters.TF_operation}}', 'Deploy')
     jobs:
       - job: 
-        displayName: provision ${{parameters.envname}} environment
+        displayName: provision ${{parameters.envName}} environment
         steps:
           - task: TerraformTaskV4@4
             inputs:
