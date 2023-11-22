@@ -43,11 +43,11 @@ stages:
         steps: 
         - checkout: mytestrepo
           path: mytestrepo
-        # - task: CopyFiles@2
-        #   inputs:
-        #     SourceFolder: '$(pipeline.workspace)/s/nsg_2'
-        #     Contents: '**'
-        #     TargetFolder: '$(build.artifactstagingdirectory)/terraform'
+        - task: CopyFiles@2
+          inputs:
+            SourceFolder: '$(pipeline.workspace)/s/nsg_2'
+            Contents: '**'
+            TargetFolder: '$(build.artifactstagingdirectory)/terraform'
 
         - task: CopyFiles@2
           inputs:
