@@ -40,7 +40,7 @@ stages:
             TargetFolder: '$(build.artifactstagingdirectory)/terraform'
         - task: PublishBuildArtifacts@1
           inputs:
-            PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+            PathtoPublish: '$(Build.ArtifactStagingDirectory)/terraform'
             ArtifactName: 'drop'
             
             publishLocation: 'Container'
