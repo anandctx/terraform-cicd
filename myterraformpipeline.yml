@@ -133,7 +133,8 @@ stages:
                provider: 'azurerm'
                command: 'plan'
                workingDirectory: '$(System.ArtifactsDirectory)/terraform/drop'
-               commandOptions: '-var-file=${{parameters.tfvarspara}}.tfvars'
+              #  commandOptions: '-var-file=${{parameters.tfvarspara}}.tfvars'
+               commandOptions: '-var-file=configuration/${{parameters.tfvarspara}}.tfvars'
                environmentServiceNameAzureRM: 'cicd-terraform-svc-nov22'
 
           # - task: TerraformTaskV4@4
