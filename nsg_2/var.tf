@@ -81,5 +81,5 @@ variable "networks" {
       })
     )
   )
-
+default = {}
 }
