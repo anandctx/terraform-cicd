@@ -26,11 +26,11 @@ parameters:
     #   - Deploy
     #   - destroy
 
-  - name: select_body
-    displayName: select_body
+  - name: tfvarspara
+    displayName: tfvars for input
     values:
-      - a
-      - b
+      - my1sub
+      - my2sub
 resources:
   repositories:
     - repository: pipelinetestrepo
@@ -119,6 +119,7 @@ stages:
                provider: 'azurerm'
                command: 'plan'
                workingDirectory: '$(System.ArtifactsDirectory)/terraform/drop'
+               commandOptions: '-var-file=${{parameters.tfvarspara}}.tfvars'
                environmentServiceNameAzureRM: 'cicd-terraform-svc-nov22'
 
           - task: TerraformTaskV4@4
