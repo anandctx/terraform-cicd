@@ -25,6 +25,12 @@ parameters:
     # values:
     #   - Deploy
     #   - destroy
+
+  - name: select_body
+    displayName: select_body
+    values:
+      - a
+      - b
 resources:
   repositories:
     - repository: pipelinetestrepo
