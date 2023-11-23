@@ -57,7 +57,7 @@ stages:
           path: pipelinetestrepo
         - checkout: self 
           path: self
-        - checkout: abc 
+        - checkout: nsgtfvarsrepo 
           path: nsgtfvarsrepo
         - task: CopyFiles@2
           displayName: copy files of nsg
