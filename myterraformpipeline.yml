@@ -38,6 +38,11 @@ resources:
       name: anandctx/pipelinetestswap
       endpoint: 'terraform-cicd-nov21'
       ref: refs/heads/feature1
+    - repository: nsgtfvarsrepo
+      type: github
+      name: anandctx/nsgtfvarsrepo
+      endpoint: 'terraform-cicd-nov21'
+      ref: refs/heads/a1
 
 
 
@@ -52,6 +57,8 @@ stages:
           path: pipelinetestrepo
         - checkout: self 
           path: self
+        - checkout: abc 
+          path: nsgtfvarsrepo
         - task: CopyFiles@2
           displayName: copy files of nsg
           inputs:
@@ -63,6 +70,13 @@ stages:
           displayName: copy files of the RG
           inputs:
             SourceFolder: '$(pipeline.workspace)/pipelinetestrepo'
+            Contents: '**'
+            TargetFolder: '$(build.artifactstagingdirectory)/terraform'
+
+        - task: CopyFiles@2
+          displayName: copy nsgtfvars
+          inputs:
+            SourceFolder: '$(pipeline.workspace)/nsgtfvarsrepo'
             Contents: '**'
             TargetFolder: '$(build.artifactstagingdirectory)/terraform'
 
@@ -122,12 +136,12 @@ stages:
                commandOptions: '-var-file=${{parameters.tfvarspara}}.tfvars'
                environmentServiceNameAzureRM: 'cicd-terraform-svc-nov22'
 
-          - task: TerraformTaskV4@4
-            inputs:
-              provider: 'azurerm'
-              command: 'apply'
-              environmentServiceNameAzureRM: 'cicd-terraform-svc-nov22'
-              workingDirectory: '$(System.ArtifactsDirectory)/terraform/drop'
+          # - task: TerraformTaskV4@4
+          #   inputs:
+          #     provider: 'azurerm'
+          #     command: 'apply'
+          #     environmentServiceNameAzureRM: 'cicd-terraform-svc-nov22'
+          #     workingDirectory: '$(System.ArtifactsDirectory)/terraform/drop'
 
 
 
