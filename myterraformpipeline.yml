@@ -22,9 +22,9 @@ parameters:
   - name: TF_operation
     displayName: select TF operation
     default: Deploy
-    values:
-      - Deploy
-      - destroy
+    # values:
+    #   - Deploy
+    #   - destroy
 resources:
   repositories:
     - repository: pipelinetestrepo
